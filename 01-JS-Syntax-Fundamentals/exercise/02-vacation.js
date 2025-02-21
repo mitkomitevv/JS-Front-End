@@ -1,6 +1,6 @@
-function vacationPlaner(numDays, typePeople, day) {
-    let totalPrice;
-    let pricePerDay;
+function vacationPlanner(numDays, typePeople, day) {
+    let totalPrice = 0;
+    let pricePerDay = 0;
 
     switch (day) {
         case 'Friday':
@@ -28,11 +28,11 @@ function vacationPlaner(numDays, typePeople, day) {
     totalPrice = pricePerDay * numDays
 
     if (typePeople === 'Students' && numDays >= 30) {
-        totalPrice = totalPrice * 0.85;
+        totalPrice *= 0.85;
     } else if (typePeople === 'Business' && numDays >= 100) {
         totalPrice = (numDays - 10) * pricePerDay;
     } else if (typePeople === 'Regular' && numDays >= 10 && numDays <= 20) {
-        totalPrice = totalPrice * 0.95;
+        totalPrice *= 0.95;
     }
 
     console.log(`Total price: ${totalPrice.toFixed(2)}`)
