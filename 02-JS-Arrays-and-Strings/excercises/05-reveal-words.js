@@ -17,3 +17,13 @@ solve('great, learning',
 'softuni is ***** place for ******** new programming languages'
 
 )
+
+function revealWords(template, text) {
+    let words = template.split(', ')
+
+    for (let word of words) {
+        text = text.replace('*'.repeat(word.length), word)
+    }
+
+    console.log(text)
+}
