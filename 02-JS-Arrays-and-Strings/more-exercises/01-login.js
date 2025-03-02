@@ -16,5 +16,3 @@ function solve(arr) {
         console.log("Incorrect password. Try again.")
     }
 }
-
-solve(['sunny','rainy','cloudy','sunny','not sunny'])
