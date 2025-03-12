@@ -9,10 +9,3 @@ function solve(arr) {
         console.log(`Name: ${person.name} -- Personal Number: ${person.number}`);
     }
 }
-solve([
-    'Silas Butler',
-    'Adnaan Buckley',
-    'Juan Peterson',
-    'Brendan Villarreal'
-    ]
-    )
