@@ -6,9 +6,7 @@ function solve(arr) {
         heroes.push({name: name, level: level, items: items})
     }
 
-    heroes.sort((a, b) => Number(a.level) - Number(b.level));
-
-    for (let hero of heroes) {
+    for (let hero of heroes.sort((a, b) => Number(a.level) - Number(b.level))) {
         console.log(`Hero: ${hero.name}\nlevel => ${hero.level}\nitems => ${hero.items}`)
     }
 }
