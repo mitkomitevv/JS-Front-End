@@ -22,8 +22,7 @@ function solve() {
 
     document.getElementById("result").textContent = result.join('');
 
-    // Same solution, but a bit shorter and more concise
-
+    // Shorter Solution
     // const capitalize = word => word[0].toUpperCase() + word.slice(1).toLowerCase();
 
     // let result;
