@@ -20,8 +20,6 @@ function solve() {
         result.push('Error!');
     }
 
-    document.getElementById("result").textContent = result.join('');
-
     // Shorter Solution
     // const capitalize = word => word[0].toUpperCase() + word.slice(1).toLowerCase();
 
