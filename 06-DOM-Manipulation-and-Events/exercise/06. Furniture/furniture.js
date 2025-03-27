@@ -5,6 +5,14 @@ function solve() {
     let furnitures = document.querySelector('#input textarea');
     document.querySelector('#input input').addEventListener('click', generate);
     
+    function createCell(text) {
+        let td = document.createElement('td');
+        let p = document.createElement('p');
+        p.textContent = text;
+        td.appendChild(p);
+        return td;
+    }
+
     function generate(e) {
         e.preventDefault();
 
@@ -17,23 +25,9 @@ function solve() {
             imgData.appendChild(img);
             tr.appendChild(imgData);
 
-            let nameData = document.createElement('td');
-            let name = document.createElement('p');
-            name.textContent = item.name;
-            nameData.appendChild(name)
-            tr.appendChild(nameData)
-
-            let priceData = document.createElement('td');
-            let price = document.createElement('p');
-            price.textContent = item.price;
-            priceData.appendChild(price);
-            tr.appendChild(priceData);
-
-            let decData = document.createElement('td');
-            let dec = document.createElement('p');
-            dec.textContent = item.decFactor;
-            decData.appendChild(dec);
-            tr.appendChild(decData);
+            tr.appendChild(createCell(item.name));
+            tr.appendChild(createCell(item.price));
+            tr.appendChild(createCell(item.decFactor));
 
             let checkCell = document.createElement('td');
             let checkbox = document.createElement('input')
