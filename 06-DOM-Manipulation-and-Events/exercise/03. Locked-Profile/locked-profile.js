@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', solve);
 
 function solve() {
-    let profiles = Array.from(document.querySelectorAll('.profile'));
-    profiles.forEach(p => p.querySelector('button').addEventListener('click', showInfo));
+    document.querySelectorAll('button').forEach(b => b.addEventListener('click', showInfo));
 
     function showInfo(e) {
         let hidden = e.target.parentElement.getElementsByClassName('hidden-fields active')[0];
