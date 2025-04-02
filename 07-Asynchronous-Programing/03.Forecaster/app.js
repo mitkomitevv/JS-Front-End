@@ -33,42 +33,41 @@ function attachEvents() {
                 let locationCode = loc.code;
 
                 try {
-                    let currLocation = await fetch(url + 'today/' + locationCode);
-                    let currData = await currLocation.json();
+                    const [todayResponse, upcomingResponse] = await Promise.all([
+                        fetch(url + 'today/' + locationCode),
+                        fetch(url + 'upcoming/' + locationCode)
+                    ]);
 
-                    let div = document.createElement('div');
-                    div.className = 'forecasts';
-                    div.innerHTML =
-                        `<span class="condition symbol">${weatherMap[currData.forecast.condition]}</span>
+                    let todayData = await todayResponse.json();
+                    let upcomingData = await upcomingResponse.json();
+
+                    let todayDiv = document.createElement('div');
+                    todayDiv.className = 'forecasts';
+                    todayDiv.innerHTML =
+                        `<span class="condition symbol">${weatherMap[todayData.forecast.condition]}</span>
                             <span class="condition">
-                                <span class="forecast-data">${currData.name}</span>
-                                <span class="forecast-data">${currData.forecast.low}${weatherMap['Degrees']}/${currData.forecast.high}${weatherMap['Degrees']}</span>
-                                <span class="forecast-data">${currData.forecast.condition}</span>
+                                <span class="forecast-data">${todayData.name}</span>
+                                <span class="forecast-data">${todayData.forecast.low}${weatherMap['Degrees']}/${todayData.forecast.high}${weatherMap['Degrees']}</span>
+                                <span class="forecast-data">${todayData.forecast.condition}</span>
                             </span>`;
-                    currentWeather.appendChild(div);
-                } catch {
-                    return;
-                }
+                    currentWeather.appendChild(todayDiv);
 
-                try {
-                    let currLocation = await fetch(url + 'upcoming/' + locationCode);
-                    let currData = await currLocation.json();
+                    let upcomingDiv = document.createElement('div');
+                    upcomingDiv.className = 'forecast-info';
 
-                    let div = document.createElement('div');
-                    div.className = 'forecast-info';
-
-                    for (let dayForecast of currData.forecast) {
+                    for (let dayForecast of upcomingData.forecast) {
                         let span = document.createElement('span');
                         span.className = 'upcoming';
                         span.innerHTML =
                             `<span class="symbol">${weatherMap[dayForecast.condition]}</span>
                              <span class="forecast-data">${dayForecast.low}${weatherMap['Degrees']}/${dayForecast.high}${weatherMap['Degrees']}</span>
                              <span class="forecast-data">${dayForecast.condition}</span>`;
-                        div.appendChild(span)
+                        upcomingDiv.appendChild(span)
                     }
 
-                    upcomingWeather.appendChild(div)
+                    upcomingWeather.appendChild(upcomingDiv)
                 } catch {
+                    forecast.textContent = 'Error';
                     return;
                 }
             }
