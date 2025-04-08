@@ -113,7 +113,7 @@ async function onEdit(e, url, list) {
     let options = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model, service, date })
+        body: JSON.stringify({ _id: appointmentId, model, service, date })
     }
 
     document.getElementById('car-model').value = '';
