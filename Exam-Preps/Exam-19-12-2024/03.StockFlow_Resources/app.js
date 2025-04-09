@@ -17,7 +17,7 @@ function attachEvents() {
 async function onLoad() {
     let res = await fetch(url);
     let data = await res.json();
-    
+
     return Object.values(data);
 }
 
@@ -33,13 +33,15 @@ async function loadOrders() {
         doneBtn.addEventListener('click', () => onDone(order._id));
 
         ordersList.appendChild(
-            create('div', [
-                create('h2', [order.name]),
-                create('h3', [order.date]),
-                create('h3', [order.quantity]),
-                changeBtn,
-                doneBtn
-            ], 'container')
+            create('li', [
+                create('div', [
+                    create('h2', [order.name]),
+                    create('h3', [order.date]),
+                    create('h3', [order.quantity]),
+                    changeBtn,
+                    doneBtn
+                ], 'container')
+            ], 'appointment')
         );
     })
 }

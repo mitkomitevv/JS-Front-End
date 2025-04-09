@@ -8,54 +8,50 @@ function solve() {
     let upcomingEvents = document.getElementById('upcoming-list');
     let eventList = document.getElementById('events-list');
 
-    let eventName = document.getElementById('event');
+    let name = document.getElementById('event');
     let note = document.getElementById('note');
     let date = document.getElementById('date');
 
     function onSave(e) {
         e.preventDefault();
 
-        if (!eventName.value || !note.value || !date.value) {
+        let currName = name.value;
+        let currNote = note.value;
+        let currDate = date.value;
+        
+        if (!currName || !currNote || !currDate) {
             return;
         }
+
+        let editBtn = create('button', ['Edit'], 'btn edit');
+        let doneBtn = create('button', ['Done'], 'btn done');
+
+        editBtn.addEventListener('click', (e) => onEdit(e, currName, currNote, currDate));
+        doneBtn.addEventListener('click', onDone);
 
         let li = create('li', [
             create('div', [
                 create('article', [
-                    create('p', [`Name: ${eventName.value}`]),
-                    create('p', [`Note: ${note.value}`]),
-                    create('p', [`Date: ${date.value}`])
+                    create('p', [`Name: ${currName}`]),
+                    create('p', [`Note: ${currNote}`]),
+                    create('p', [`Date: ${currDate}`])
                 ]),
-                create('div', [], 'buttons')
+                create('div', [
+                    editBtn,
+                    doneBtn
+                ], 'buttons')
             ], 'event-container')
         ], 'event-item');
 
         upcomingEvents.appendChild(li);
 
-        let editBtn = document.createElement('button');
-        editBtn.className = 'btn edit';
-        editBtn.textContent = 'Edit';
-        editBtn.dataset.event = eventName.value;
-        editBtn.dataset.note = note.value;
-        editBtn.dataset.date = date.value;
-        editBtn.addEventListener('click', onEdit);
-
-        let doneBtn = document.createElement('button');
-        doneBtn.className = 'btn done';
-        doneBtn.textContent = 'Done';
-        doneBtn.addEventListener('click', onDone);
-
-        let buttonsContainer = li.querySelector('.buttons');
-        buttonsContainer.appendChild(editBtn);
-        buttonsContainer.appendChild(doneBtn);
-
         e.target.parentElement.reset();
     }
 
-    function onEdit(e) {
-        eventName.value = e.target.dataset.event;
-        note.value = e.target.dataset.note;
-        date.value = e.target.dataset.date;
+    function onEdit(e, eventName, eventNote, eventDate) {
+        name.value = eventName;
+        note.value = eventNote;
+        date.value = eventDate;
 
         e.target.closest('li').remove();
     }

@@ -6,7 +6,6 @@ function solve(arr) {
         let [name, section, skills] = arr.shift().split(' ');
         crew.set(name, { section, skills: skills.split(',') });
     }
-    console.log(crew)
 
     while (arr[0] !== 'End') {
         let tokens = arr.shift().split(' / ');
