@@ -3,7 +3,9 @@ window.addEventListener("load", solve);
 function solve() {
     let saveBtn = document.getElementById('save');
     saveBtn.addEventListener('click', onSave);
-    document.querySelector('.delete').addEventListener('click', onDelete);
+    document.querySelector('.delete').addEventListener('click', () => {
+        eventList.replaceChildren();
+    });
 
     let upcomingEvents = document.getElementById('upcoming-list');
     let eventList = document.getElementById('events-list');
@@ -61,10 +63,6 @@ function solve() {
 
         li.querySelector('.buttons').remove();
         eventList.appendChild(li);
-    }
-
-    function onDelete() {
-        eventList.replaceChildren();
     }
 
     function create(tag, children, className) {
